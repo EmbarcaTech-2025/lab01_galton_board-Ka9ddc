@@ -37,11 +37,17 @@ pico_sdk_init()
 
 add_executable(lab-01-galton-board
   ./src/lab-01-galton-board.c 
-  ./include/ssd1306_i2c.c
+  ./src/galton.c
+  ./src/display.c
+  ./src/hal_i2c.c 
+  ./include/ssd1306.c
 )
 
 pico_set_program_name(lab-01-galton-board "lab-01-galton-board")
 pico_set_program_version(lab-01-galton-board "0.1")
+
+target_sources(lab-01-galton-board PRIVATE src/lab-01-galton-board.c include/ssd1306.c)
+target_sources(lab-01-galton-board PRIVATE src/display.c include/ssd1306.c)
 
 # Modify the below lines to enable/disable output over UART/USB
 pico_enable_stdio_uart(lab-01-galton-board 0)
@@ -64,4 +70,3 @@ target_link_libraries(lab-01-galton-board
         )
 
 pico_add_extra_outputs(lab-01-galton-board)
-
